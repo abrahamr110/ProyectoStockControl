@@ -15,11 +15,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AppStockControl {
-
+    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadMySQL");
+    public static EntityManager em = emf.createEntityManager();
 
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadMySQL");
-        EntityManager em = emf.createEntityManager();
         /*
         Declaro aquí variables que voy a usar durante la ejecución del main
          */

@@ -9,22 +9,23 @@ import java.util.List;
 public class Proveedor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre",unique = true,length = 50,nullable = false)
+    @Column(name = "nombre", unique = true, length = 50, nullable = false)
     private String nombre;
 
-    @Column(name = "direccion",nullable = false)
+    @Column(name = "direccion", nullable = false)
     private String direccion;
 
     @OneToMany(mappedBy = "proveedor")
     private List<Producto> productos;
 
-    public Proveedor(String nombre, String direccion, List<Producto> productos) {
+    public Proveedor () {}
+
+    public Proveedor(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion = direccion;
-        this.productos = productos;
     }
 
     public Long getId() {

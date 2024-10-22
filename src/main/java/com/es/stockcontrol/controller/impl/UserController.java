@@ -1,14 +1,9 @@
 package com.es.stockcontrol.controller.impl;
 
-
-import com.es.stockcontrol.AppStockControl;
 import com.es.stockcontrol.controller.api.UserControllerAPI;
 import com.es.stockcontrol.model.RespuestaHTTP;
 import com.es.stockcontrol.model.User;
 import com.es.stockcontrol.repository.UserRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 public class UserController implements UserControllerAPI {
     @Override

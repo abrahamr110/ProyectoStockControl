@@ -13,7 +13,7 @@ public class UserRepository {
     List<User> users = new ArrayList<>();
 
     public User findUser(User user){
-        return users.stream().filter(u -> u.getNombre_usuario().equals(user.getNombre_usuario())).findFirst().orElse(null);
+        return users.stream().filter(u -> u.getPassword().equals(user.getPassword())).findFirst().orElse(null);
     }
 
     public void addUser(User user) {

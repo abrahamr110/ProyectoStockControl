@@ -1,34 +1,35 @@
 package com.es.stockcontrol.repository;
 
+import com.es.stockcontrol.AppStockControl;
+import com.es.stockcontrol.model.Producto;
 import com.es.stockcontrol.model.Proveedor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProveedorRepository {
-    List<Proveedor> proveedores = new ArrayList<>();
 
-    public Proveedor findProveedorById(Proveedor proveedor){
-        return proveedores.stream().filter(p->p.getId().equals(proveedor.getId())).findFirst().orElse(null);
-    }
+    public Proveedor getProveedorProducto(){
+        AppStockControl.em.getTransaction().begin();
 
-    public void addProveedor(Proveedor proveedor){
-        proveedores.add(proveedor);
-    }
+        Producto producto = AppStockControl.em.find(Producto.class, 1);
 
-    public void deleteProveedor(Proveedor proveedor){
-        proveedores.remove(proveedor);
-    }
+        if (producto != null) {
 
-    public List<Proveedor> getAllProveedores(){
-        return proveedores;
-    }
-
-    public void updateProveedor(Proveedor proveedor){
-        Proveedor existingProveedor = findProveedorById(proveedor);
-        if(existingProveedor != null){
-            existingProveedor.setNombre(proveedor.getNombre());
-            existingProveedor.setDireccion(proveedor.getDireccion());
+            return producto.getProveedor();
         }
+
+        AppStockControl.em.getTransaction().commit();
+
+        return null;
+    }
+    public List<Proveedor> getAllProveedores(){
+        AppStockControl.em.getTransaction().begin();
+
+        List<Proveedor> proveedores = AppStockControl.em.createQuery("SELECT * FROM Proveedor", Proveedor.class).getResultList();
+
+        AppStockControl.em.getTransaction().commit();
+
+        return proveedores;
     }
 }

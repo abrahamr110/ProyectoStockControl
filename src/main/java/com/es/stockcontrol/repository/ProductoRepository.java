@@ -1,10 +1,24 @@
 package com.es.stockcontrol.repository;
 
+import com.es.stockcontrol.model.Producto;
+import com.es.stockcontrol.utils.HibernateUtils;
+
+import java.util.List;
+
 public class ProductoRepository {
 
-    public void getProducto(String idProducto) {
+    public Producto getProducto(String idProducto) {
         HibernateUtils.em.getTransaction().begin();
+
+        Producto producto = HibernateUtils.em.find(Producto.class, idProducto);
+
+        if (producto != null) {
+            return producto;
+        }
+
         HibernateUtils.em.getTransaction().commit();
+
+        return null;
     }
 
     public List<Producto> getProductosConStock() {

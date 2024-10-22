@@ -28,19 +28,23 @@ public class Producto {
     @Column(name = "fecha_alta",nullable = false)
     private Date fecha_alta;
 
+    @Column(name = "stock", nullable = false)
+    private Integer stock;
+
     @ManyToOne
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
 
     public Producto () {}
 
-    public Producto(String nombre, String categoria, String descripcion, float precio_sin_iva, float precio_con_iva, Date fecha_alta, Proveedor proveedor) {
+    public Producto(String nombre, String categoria, String descripcion, float precio_sin_iva, float precio_con_iva, Date fecha_alta, Integer stock, Proveedor proveedor) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.precio_sin_iva = precio_sin_iva;
         this.precio_con_iva = precio_con_iva;
         this.fecha_alta = fecha_alta;
+        this.stock = stock;
         this.proveedor = proveedor;
     }
 
@@ -98,6 +102,14 @@ public class Producto {
 
     public void setFecha_alta(Date fecha_alta) {
         this.fecha_alta = fecha_alta;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public Proveedor getProveedor() {

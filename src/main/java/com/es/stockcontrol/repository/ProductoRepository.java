@@ -1,11 +1,5 @@
 package com.es.stockcontrol.repository;
 
-import com.es.stockcontrol.model.Producto;
-import com.es.stockcontrol.utils.HibernateUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class ProductoRepository {
 
     public void getProducto(String idProducto) {

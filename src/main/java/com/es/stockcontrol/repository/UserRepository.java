@@ -40,9 +40,5 @@ public class UserRepository {
 
         AppStockControl.em.getTransaction().commit();
     }
-
-    public static void updateUser(User user){
-
-    }
 }
 

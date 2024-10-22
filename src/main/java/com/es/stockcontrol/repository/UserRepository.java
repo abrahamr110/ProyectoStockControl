@@ -1,5 +1,6 @@
 package com.es.stockcontrol.repository;
 
+import com.es.stockcontrol.AppStockControl;
 import com.es.stockcontrol.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,30 +11,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
-    List<User> users = new ArrayList<>();
 
-    public User findUser(User user){
-        return users.stream().filter(u -> u.getPassword().equals(user.getPassword())).findFirst().orElse(null);
+    public static User findUser(String userName){
+        AppStockControl.em.getTransaction().begin();
+
+        User usuario = AppStockControl.em.find(User.class, userName);
+
+        AppStockControl.em.getTransaction().commit();
+
+        return usuario;
     }
 
-    public void addUser(User user) {
-        users.add(user);
+    public static User addUser(User user) {
+        AppStockControl.em.getTransaction().begin();
+
+        AppStockControl.em.persist(user);
+
+        AppStockControl.em.getTransaction().commit();
+
+        return user;
     }
 
-    public List<User> getAllUsers() {
-        return users;
+
+    public static void deleteUser(User user) {
+        AppStockControl.em.getTransaction().begin();
+
+        AppStockControl.em.remove(user);
+
+        AppStockControl.em.getTransaction().commit();
     }
 
-    public void deleteUser(User user) {
-        users.remove(user);
-    }
+    public static void updateUser(User user){
 
-    public void updateUser(User user){
-        User existingUser = findUser(user);
-        if (existingUser != null) {
-            existingUser.setPassword(user.getPassword());
-            existingUser.setNombre_usuario(user.getNombre_usuario());
-        }
     }
 }
 

@@ -36,25 +36,15 @@ public class ProductoRepository {
         return productos;
     }
 
-    public void altaProducto(String idProducto, String nombreProducto, String precioSinIva, String descripcionProducto,String idProveedor, String nombreProveedor, String direccionProveedor) {
+    public static Producto altaProducto(Proveedor proveedor, Producto producto) {
         HibernateUtils.em.getTransaction().begin();
-        Producto producto=new Producto();
-        Proveedor proveedor=new Proveedor();
 
-        producto.setId(idProducto);
-        producto.setNombre(nombreProducto);
-        producto.setPrecio_sin_iva(Float.parseFloat(precioSinIva));
-        producto.setDescripcion(descripcionProducto);
-
-        proveedor.setId(Long.parseLong(idProveedor));
-        proveedor.setNombre(nombreProveedor);
-        proveedor.setDireccion(direccionProveedor);
-
-        producto.setProveedor(proveedor);
-
+        HibernateUtils.em.persist(proveedor);
         HibernateUtils.em.persist(producto);
 
         HibernateUtils.em.getTransaction().commit();
+
+        return producto;
     }
 
     public void bajaProducto(String idProducto) {

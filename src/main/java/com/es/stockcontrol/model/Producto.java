@@ -8,6 +8,7 @@ import java.util.Date;
 @Table
 public class Producto {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(name="nombre",length = 50,nullable = false)
@@ -37,14 +38,14 @@ public class Producto {
 
     public Producto () {}
 
-    public Producto(String nombre, String categoria, String descripcion, float precio_sin_iva, float precio_con_iva, Date fecha_alta, Integer stock, Proveedor proveedor) {
+    public Producto(String nombre, String categoria, String descripcion, float precio_sin_iva, float precio_con_iva, Proveedor proveedor) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.precio_sin_iva = precio_sin_iva;
         this.precio_con_iva = precio_con_iva;
-        this.fecha_alta = fecha_alta;
-        this.stock = stock;
+        this.fecha_alta = new Date();
+        this.stock = 0;
         this.proveedor = proveedor;
     }
 

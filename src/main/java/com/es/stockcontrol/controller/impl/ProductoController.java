@@ -19,7 +19,9 @@ public class ProductoController implements ProductoControllerAPI {
 
     @Override
     public RespuestaHTTP<Producto> bajaProducto(String id) {
-        return null;
+        RespuestaHTTP<Producto> productoRespuestaHTTP = ProductoService.bajaProducto(id);
+
+        return productoRespuestaHTTP;
     }
 
     @Override

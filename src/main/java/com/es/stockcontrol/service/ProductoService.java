@@ -22,4 +22,20 @@ public class ProductoService {
             return new RespuestaHTTP<Producto>(400, "One or more fields are empty", null);
         }
     }
+
+    public static RespuestaHTTP<Producto> bajaProducto(String id) {
+        if (id.isBlank()) {
+            return new RespuestaHTTP<Producto>(400, "Id cant be blank", null);
+        }
+
+        Producto producto = ProductoRepository.getProducto(id);
+
+        if (producto == null) {
+            return new RespuestaHTTP<Producto>(404, "The id is not correct", null);
+        }
+
+        ProductoRepository.bajaProducto(id);
+
+        return new RespuestaHTTP<Producto>(200, "OK", producto);
+    }
 }

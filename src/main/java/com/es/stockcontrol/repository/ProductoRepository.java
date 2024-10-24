@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProductoRepository {
 
-    public Producto getProducto(String idProducto) {
+    public static Producto getProducto(String idProducto) {
         HibernateUtils.em.getTransaction().begin();
 
         Producto producto = HibernateUtils.em.find(Producto.class, idProducto);
@@ -47,9 +47,11 @@ public class ProductoRepository {
         return producto;
     }
 
-    public void bajaProducto(String idProducto) {
+    public static void bajaProducto(String idProducto) {
         HibernateUtils.em.getTransaction().begin();
+
         HibernateUtils.em.remove(HibernateUtils.em.find(Producto.class, idProducto));
+
         HibernateUtils.em.getTransaction().commit();
     }
 

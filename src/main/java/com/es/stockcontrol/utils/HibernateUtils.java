@@ -7,4 +7,6 @@ import jakarta.persistence.Persistence;
 public class HibernateUtils {
     public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadMySQL");
     public static EntityManager em = emf.createEntityManager();
+
+
 }

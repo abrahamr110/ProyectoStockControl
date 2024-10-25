@@ -88,7 +88,7 @@ public class AppStockControl {
         5. Get producto por id
         6. Get productos con stock
         7. Get productos sin stock
-        8. Get proveedores de un producto
+        8. Get proveedor de un producto
         9. Get todos los proveedores
          */
         String opc;
@@ -107,7 +107,7 @@ public class AppStockControl {
                     5. Get producto por id
                     6. Get productos con stock
                     7. Get productos sin stock
-                    8. Get proveedores de un producto
+                    8. Get proveedor de un producto
                     9. Get todos los proveedores
                     0. Salir
                     """);
@@ -138,7 +138,7 @@ public class AppStockControl {
                         getProductosSinStock();
                         break;
                     case "8":
-                        getProveedoresDeUnProducto();
+                        getProveedorDeUnProducto();
                         break;
                     case "9":
                         getTodosLosProveedores();
@@ -294,20 +294,19 @@ public class AppStockControl {
         }
     }
 
-    public static void getProveedoresDeUnProducto() {
+    public static void getProveedorDeUnProducto() {
         Scanner scan = new Scanner(System.in);
         ProveedorController proveedorController = new ProveedorController();
-        System.out.println("8. Get proveedores de un producto");
+        System.out.println("8. Get proveedor de un producto");
 
         System.out.print("Introduzca el id del producto: ");
         String idProducto = scan.nextLine();
-        RespuestaHTTP<List<Proveedor>> respuesta = proveedorController.getProveedoresProducto(idProducto);
+        RespuestaHTTP<Proveedor> respuesta = proveedorController.getProveedorProducto(idProducto);
 
         if (respuesta != null && respuesta.getCodigo() == 200) {
             System.out.printf("OPERACION EXITOSA");
-            respuesta.getObj().forEach(proveedor -> {
-                proveedor.toString();
-            });
+            respuesta.getObj().toString();
+
         } else {
             System.out.printf("Error en la operacion\n\t-codigo %d\n\t-%s\n", respuesta.getCodigo(), respuesta.getMensaje());
         }

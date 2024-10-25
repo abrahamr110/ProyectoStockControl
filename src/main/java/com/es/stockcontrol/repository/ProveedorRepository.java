@@ -13,10 +13,10 @@ import java.util.List;
 
 public class ProveedorRepository {
 
-    public Proveedor getProveedorProducto(){
+    public static Proveedor getProveedorProducto(String id){
         HibernateUtils.em.getTransaction().begin();
 
-        Producto producto = HibernateUtils.em.find(Producto.class, 1);
+        Producto producto = HibernateUtils.em.find(Producto.class, id);
 
         if (producto != null) {
 
@@ -30,7 +30,7 @@ public class ProveedorRepository {
     public List<Proveedor> getAllProveedores(){
         HibernateUtils.em.getTransaction().begin();
 
-        List<Proveedor> proveedores = HibernateUtils.em.createQuery("SELECT * FROM Proveedor", Proveedor.class).getResultList();
+        List<Proveedor> proveedores = HibernateUtils.em.createQuery("SELECT * FROM proveedor", Proveedor.class).getResultList();
 
         HibernateUtils.em.getTransaction().commit();
 

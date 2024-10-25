@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ProveedorControllerAPI {
 
-    RespuestaHTTP<List<Proveedor>> getProveedoresProducto(String idProducto);
+    RespuestaHTTP<Proveedor> getProveedorProducto(String idProducto);
     RespuestaHTTP<List<Proveedor>> getTodosProveedores();
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ProductoController implements ProductoControllerAPI {
 
-
     @Override
     public RespuestaHTTP<Producto> altaProducto(String categoriaProducto, String nombreProducto, String precioSinIva, String descripcionProducto, String nombreProveedor, String direccionProveedor) {
         RespuestaHTTP<Producto> productoRespuestaHTTP = ProductoService.altaProducto(categoriaProducto, nombreProducto, precioSinIva, descripcionProducto, nombreProveedor, direccionProveedor);
@@ -26,7 +25,9 @@ public class ProductoController implements ProductoControllerAPI {
 
     @Override
     public RespuestaHTTP<Producto> modificarNombreProducto(String id, String nuevoNombre) {
-        return null;
+        RespuestaHTTP<Producto> productoUpdated = ProductoService.modificarNombreProducto(id, nuevoNombre);
+
+        return productoUpdated;
     }
 
     @Override

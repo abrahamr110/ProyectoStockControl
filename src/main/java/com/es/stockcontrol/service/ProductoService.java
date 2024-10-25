@@ -38,4 +38,22 @@ public class ProductoService {
 
         return new RespuestaHTTP<Producto>(200, "OK", producto);
     }
+
+    public static RespuestaHTTP<Producto> modificarNombreProducto(String id, String nuevoNombre) {
+        if (id.isBlank() || nuevoNombre.isBlank()) {
+            return new RespuestaHTTP<Producto>(400, "Id/name cant be blank", null);
+        }
+
+        Producto producto = ProductoRepository.getProducto(id);
+
+        if (producto == null) {
+            return new RespuestaHTTP<Producto>(404, "The id is not correct", null);
+        }
+
+        ProductoRepository.modificarProducto(id, nuevoNombre);
+
+        producto.setNombre(nuevoNombre);
+
+        return new RespuestaHTTP<Producto>(200, "OK", producto);
+    }
 }

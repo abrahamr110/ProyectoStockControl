@@ -66,10 +66,10 @@ public class ProductoRepository {
         HibernateUtils.em.getTransaction().commit();
     }
 
-    public void modificarStock(String idProducto, String nuevoStock) {
+    public static void modificarStock(String idProducto, Integer nuevoStock) {
         HibernateUtils.em.getTransaction().begin();
 
-        HibernateUtils.em.createQuery("UPDATE Producto SET stock = :nuevoStock WHERE id = :id")
+        HibernateUtils.em.createQuery("UPDATE producto SET stock = :nuevoStock WHERE id = :id")
                         .setParameter("nuevoStock", nuevoStock)
                         .setParameter("id", idProducto)
                         .executeUpdate();

@@ -32,7 +32,9 @@ public class ProductoController implements ProductoControllerAPI {
 
     @Override
     public RespuestaHTTP<Producto> modificarStockProducto(String id, String nuevoStock) {
-        return null;
+        RespuestaHTTP<Producto> productoUpdated = ProductoService.modificarStockProducto(id, nuevoStock);
+
+        return productoUpdated;
     }
 
     @Override

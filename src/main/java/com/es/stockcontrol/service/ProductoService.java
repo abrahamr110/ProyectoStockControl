@@ -56,4 +56,27 @@ public class ProductoService {
 
         return new RespuestaHTTP<Producto>(200, "OK", producto);
     }
+
+    public static RespuestaHTTP<Producto> modificarStockProducto(String id, String nuevoStock) {
+        if (id.isBlank() || nuevoStock.isBlank()) {
+            return new RespuestaHTTP<Producto>(400, "Id/name cant be blank", null);
+        }
+
+        try {
+            int stock = Integer.parseInt(nuevoStock);
+
+            Producto producto = ProductoRepository.getProducto(id);
+
+            if (producto == null) {
+                return new RespuestaHTTP<Producto>(404, "The id is not correct", null);
+            }
+
+            ProductoRepository.modificarStock(id, stock);
+            producto.setStock(stock);
+
+            return new RespuestaHTTP<Producto>(200, "OK", producto);
+        } catch (NumberFormatException e) {
+            return new RespuestaHTTP<Producto>(400, "Stock need to be a number", null);
+        }
+    }
 }

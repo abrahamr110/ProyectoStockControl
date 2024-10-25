@@ -79,4 +79,18 @@ public class ProductoService {
             return new RespuestaHTTP<Producto>(400, "Stock need to be a number", null);
         }
     }
+
+    public static RespuestaHTTP<Producto> getProducto(String id) {
+        if (id.isBlank()) {
+            return new RespuestaHTTP<Producto>(400, "Id cant be blank", null);
+        }
+
+        Producto producto = ProductoRepository.getProducto(id);
+
+        if (producto != null) {
+            return new RespuestaHTTP<Producto>(200, "OK", producto);
+        } else {
+            return new RespuestaHTTP<Producto>(404, "Product not found", null);
+        }
+    }
 }

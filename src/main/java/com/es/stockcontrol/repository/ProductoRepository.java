@@ -22,17 +22,23 @@ public class ProductoRepository {
         return null;
     }
 
-    public List<Producto> getProductosConStock() {
+    public static List<Producto> getProductosConStock() {
         HibernateUtils.em.getTransaction().begin();
-        List<Producto> productos = HibernateUtils.em.createQuery("SELECT * FROM Producto WHERE stock > 0", Producto.class).getResultList();
+
+        List<Producto> productos = HibernateUtils.em.createQuery("SELECT * FROM producto WHERE stock > 0", Producto.class).getResultList();
+
         HibernateUtils.em.getTransaction().commit();
+
         return productos;
     }
 
-    public List<Producto> getProductosSinStock() {
+    public static List<Producto> getProductosSinStock() {
         HibernateUtils.em.getTransaction().begin();
-        List<Producto> productos = HibernateUtils.em.createQuery("SELECT * FROM Producto WHERE stock = 0", Producto.class).getResultList();
+
+        List<Producto> productos = HibernateUtils.em.createQuery("SELECT * FROM producto WHERE stock = 0", Producto.class).getResultList();
+
         HibernateUtils.em.getTransaction().commit();
+
         return productos;
     }
 

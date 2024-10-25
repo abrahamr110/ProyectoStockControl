@@ -5,6 +5,7 @@ import com.es.stockcontrol.model.Producto;
 import com.es.stockcontrol.model.RespuestaHTTP;
 import com.es.stockcontrol.service.ProductoService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoController implements ProductoControllerAPI {
@@ -46,11 +47,22 @@ public class ProductoController implements ProductoControllerAPI {
 
     @Override
     public RespuestaHTTP<List<Producto>> getProductosConStock() {
-        return null;
+        List<Producto> productos = ProductoService.getProductosConStock();
+
+        if (productos == null || productos.isEmpty()) {
+            return new RespuestaHTTP<List<Producto>>(204, "No content", new ArrayList<Producto>());
+        }
+
+        return new RespuestaHTTP<List<Producto>>(200, "OK", productos);
     }
 
     @Override
     public RespuestaHTTP<List<Producto>> getProductosSinStock() {
-        return null;
-    }
+        List<Producto> productos = ProductoService.getProductosSinStock();
+
+        if (productos == null || productos.isEmpty()) {
+            return new RespuestaHTTP<List<Producto>>(204, "No content", new ArrayList<Producto>());
+        }
+
+        return new RespuestaHTTP<List<Producto>>(200, "OK", productos);    }
 }

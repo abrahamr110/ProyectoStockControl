@@ -5,6 +5,8 @@ import com.es.stockcontrol.model.Proveedor;
 import com.es.stockcontrol.model.RespuestaHTTP;
 import com.es.stockcontrol.repository.ProductoRepository;
 
+import java.util.List;
+
 public class ProductoService {
     public static RespuestaHTTP<Producto> altaProducto(String categoriaProducto, String nombreProducto, String precioSinIva, String descripcionProducto, String nombreProveedor, String direccionProveedor) {
         if (!categoriaProducto.isBlank() && !nombreProducto.isBlank() && !precioSinIva.isBlank() && !descripcionProducto.isBlank() && !nombreProveedor.isBlank() && !direccionProveedor.isBlank()) {
@@ -92,5 +94,17 @@ public class ProductoService {
         } else {
             return new RespuestaHTTP<Producto>(404, "Product not found", null);
         }
+    }
+
+    public static List<Producto> getProductosConStock() {
+        List<Producto> productos = ProductoRepository.getProductosConStock();
+
+        return productos;
+    }
+
+    public static List<Producto> getProductosSinStock() {
+        List<Producto> productos = ProductoRepository.getProductosSinStock();
+
+        return productos;
     }
 }

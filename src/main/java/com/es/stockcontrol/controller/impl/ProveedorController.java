@@ -5,6 +5,7 @@ import com.es.stockcontrol.model.Proveedor;
 import com.es.stockcontrol.model.RespuestaHTTP;
 import com.es.stockcontrol.service.ProveedorService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProveedorController implements ProveedorControllerAPI {
@@ -17,6 +18,12 @@ public class ProveedorController implements ProveedorControllerAPI {
 
     @Override
     public RespuestaHTTP<List<Proveedor>> getTodosProveedores() {
-        return null;
+        List<Proveedor> proveedors = ProveedorService.getTodosProveedores();
+
+        if (proveedors == null || proveedors.isEmpty()) {
+            return new RespuestaHTTP<List<Proveedor>>(204, "No content", new ArrayList<>());
+        }
+
+        return new RespuestaHTTP<List<Proveedor>>(200, "OK", proveedors);
     }
 }

@@ -27,7 +27,7 @@ public class ProveedorRepository {
 
         return null;
     }
-    public List<Proveedor> getAllProveedores(){
+    public static List<Proveedor> getAllProveedores(){
         HibernateUtils.em.getTransaction().begin();
 
         List<Proveedor> proveedores = HibernateUtils.em.createQuery("SELECT * FROM proveedor", Proveedor.class).getResultList();

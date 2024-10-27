@@ -71,7 +71,7 @@ public class AppStockControl {
                         System.out.printf("Error en el login\n\t-codigo %d\n\t-%s\n", respuestaHTTP.getCodigo(), respuestaHTTP.getMensaje());
                     }
                 } catch (Exception e) {
-                    System.out.println("Error controlado");
+                    System.out.println("Error controladoa");
                 }
             }
         } while (!login);
@@ -197,7 +197,7 @@ public class AppStockControl {
 
         System.out.print("Introduzca el id del producto: ");
         String idProducto = scan.nextLine();
-        RespuestaHTTP<Producto> respuesta= productoController.bajaProducto(idProducto);
+        RespuestaHTTP<Producto> respuesta = productoController.bajaProducto(idProducto);
 
         if (respuesta != null && respuesta.getCodigo() == 200) {
             System.out.printf("OPERACION EXITOSA");
@@ -253,7 +253,7 @@ public class AppStockControl {
 
         if (respuesta != null && respuesta.getCodigo() == 200) {
             System.out.printf("OPERACION EXITOSA");
-            respuesta.getObj().toString();
+            System.out.println(respuesta.getObj().toString());
         } else {
             System.out.printf("Error en la operacion\n\t-codigo %d\n\t-%s\n", respuesta.getCodigo(), respuesta.getMensaje());
         }
@@ -269,7 +269,7 @@ public class AppStockControl {
         if (respuesta != null && respuesta.getCodigo() == 200) {
             System.out.printf("OPERACION EXITOSA");
             respuesta.getObj().forEach(producto -> {
-                producto.toString();
+                System.out.println(producto.toString());;
             });
         } else {
             System.out.printf("Error en la operacion\n\t-codigo %d\n\t-%s\n", respuesta.getCodigo(), respuesta.getMensaje());
@@ -287,7 +287,7 @@ public class AppStockControl {
         if (respuesta != null && respuesta.getCodigo() == 200) {
             System.out.printf("OPERACION EXITOSA");
             respuesta.getObj().forEach(producto -> {
-                producto.toString();
+                System.out.println(producto.toString());
             });
         } else {
             System.out.printf("Error en la operacion\n\t-codigo %d\n\t-%s\n", respuesta.getCodigo(), respuesta.getMensaje());
@@ -305,7 +305,7 @@ public class AppStockControl {
 
         if (respuesta != null && respuesta.getCodigo() == 200) {
             System.out.printf("OPERACION EXITOSA");
-            respuesta.getObj().toString();
+            System.out.println(respuesta.getObj().toString());;
 
         } else {
             System.out.printf("Error en la operacion\n\t-codigo %d\n\t-%s\n", respuesta.getCodigo(), respuesta.getMensaje());
@@ -322,9 +322,8 @@ public class AppStockControl {
 
         if (respuesta != null && respuesta.getCodigo() == 200) {
             System.out.printf("OPERACION EXITOSA");
-
             respuesta.getObj().forEach(proveedor -> {
-                proveedor.toString();
+                System.out.println(proveedor.toString());
             });
         } else {
             System.out.printf("Error en la operacion\n\t-codigo %d\n\t-%s\n", respuesta.getCodigo(), respuesta.getMensaje());

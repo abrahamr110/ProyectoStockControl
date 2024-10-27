@@ -18,22 +18,24 @@ public class ProveedorRepository {
 
         Producto producto = HibernateUtils.em.find(Producto.class, id);
 
-        if (producto != null) {
+        HibernateUtils.em.getTransaction().commit();
 
+        if (producto != null) {
             return producto.getProveedor();
         }
 
-        HibernateUtils.em.getTransaction().commit();
-
         return null;
     }
-    public static List<Proveedor> getAllProveedores(){
+    public static List<Proveedor> getAllProveedores() {
         HibernateUtils.em.getTransaction().begin();
 
-        List<Proveedor> proveedores = HibernateUtils.em.createQuery("SELECT * FROM proveedor", Proveedor.class).getResultList();
+        List<Proveedor> proveedores = HibernateUtils.em
+                .createQuery("SELECT p FROM Proveedor p", Proveedor.class)
+                .getResultList();
 
         HibernateUtils.em.getTransaction().commit();
 
         return proveedores;
     }
+
 }

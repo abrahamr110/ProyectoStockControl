@@ -13,19 +13,17 @@ public class ProductoRepository {
 
         Producto producto = HibernateUtils.em.find(Producto.class, idProducto);
 
-        if (producto != null) {
-            return producto;
-        }
-
         HibernateUtils.em.getTransaction().commit();
 
-        return null;
+        return producto;
     }
 
     public static List<Producto> getProductosConStock() {
         HibernateUtils.em.getTransaction().begin();
 
-        List<Producto> productos = HibernateUtils.em.createQuery("SELECT * FROM producto WHERE stock > 0", Producto.class).getResultList();
+        List<Producto> productos = HibernateUtils.em.createQuery(
+                        "SELECT p FROM Producto p WHERE p.stock > 0", Producto.class)
+                .getResultList();
 
         HibernateUtils.em.getTransaction().commit();
 
@@ -35,7 +33,9 @@ public class ProductoRepository {
     public static List<Producto> getProductosSinStock() {
         HibernateUtils.em.getTransaction().begin();
 
-        List<Producto> productos = HibernateUtils.em.createQuery("SELECT * FROM producto WHERE stock = 0", Producto.class).getResultList();
+        List<Producto> productos = HibernateUtils.em.createQuery(
+                        "SELECT p FROM Producto p WHERE p.stock = 0", Producto.class)
+                .getResultList();
 
         HibernateUtils.em.getTransaction().commit();
 
@@ -64,7 +64,7 @@ public class ProductoRepository {
     public static void modificarProducto(String idProducto, String nuevoNombre) {
         HibernateUtils.em.getTransaction().begin();
 
-        HibernateUtils.em.createQuery("UPDATE producto SET nombre = :nuevoNombre WHERE id = :id")
+        HibernateUtils.em.createQuery("UPDATE Producto p SET p.nombre = :nuevoNombre WHERE p.id = :id")
                 .setParameter("nuevoNombre", nuevoNombre)
                 .setParameter("id", idProducto)
                 .executeUpdate();
@@ -75,10 +75,10 @@ public class ProductoRepository {
     public static void modificarStock(String idProducto, Integer nuevoStock) {
         HibernateUtils.em.getTransaction().begin();
 
-        HibernateUtils.em.createQuery("UPDATE producto SET stock = :nuevoStock WHERE id = :id")
-                        .setParameter("nuevoStock", nuevoStock)
-                        .setParameter("id", idProducto)
-                        .executeUpdate();
+        HibernateUtils.em.createQuery("UPDATE Producto p SET p.stock = :nuevoStock WHERE p.id = :id")
+                .setParameter("nuevoStock", nuevoStock)
+                .setParameter("id", idProducto)
+                .executeUpdate();
 
         HibernateUtils.em.getTransaction().commit();
     }
